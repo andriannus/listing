@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<?php echo $item['nama']; ?>
 					</div>
 					<div class="panel-footer">
-						<a class="" href="#">Lihat</a>
+						<a href="<?php echo base_url('home/view/'.$item['id_item']); ?>">Lihat</a>
 					</div>
 				</div>
 			</div>

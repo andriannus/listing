@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Out extends CI_Controller {
 
+	public $menu = 'out';
+
 	public function __construct()
 	{
 		parent::__construct();

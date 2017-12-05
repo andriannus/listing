@@ -19,12 +19,78 @@ class Home extends CI_Controller {
 		$this->load->view('core/base_app', $data);
 	}
 
-	public function view()
+	public function views()
 	{
 		$data['title'] = 'Administrator';
-		$data['page'] = 'home/view';
+		$data['page'] = 'home/views';
 		$data['query'] = $this->home->get_all()->result_array();
 
 		$this->load->view('core/base_app', $data);
+	}
+
+	public function view($id)
+	{
+		$data['id'] = $id;
+
+		$bulan = $this->input->get('bulan');
+		$tahun = $this->input->get('tahun');
+
+		if(isset($bulan)) {
+
+			if(!empty($tahun)){
+				$cek = $this->home->get_by_month_year($id, $bulan, $tahun)->row();
+
+				if(!empty($cek->jumlah_stokawal)) {
+					$data['title'] = 'Administrator';
+					$data['page'] = 'home/view';
+					$data['bulan'] = $bulan;
+					$data['tahun'] = $tahun;
+					$data['item'] = $this->home->get_nama_item($id)->row();
+					$data['query'] = $this->home->get_by_month_year($id, $bulan, $tahun)->result_array();
+
+					$this->load->view('core/base_app', $data);
+
+				} else {
+					$data['title'] = 'Administrator';
+					$data['page'] = 'home/view';
+					$data['bulan'] = $bulan;
+					$data['tahun'] = $tahun;
+					$data['item'] = $this->home->get_nama_item($id)->row();
+					$data['query'] = '';
+
+					$this->load->view('core/base_app', $data);
+				}
+
+			} else {
+				$cek = $this->home->get_by_month($id, $bulan)->row();
+
+				if(!empty($cek->jumlah_stokawal)) {
+
+					$data['title'] = 'Administrator';
+					$data['page'] = 'home/view';
+					$data['bulan'] = $bulan;
+					$data['item'] = $this->home->get_nama_item($id)->row();
+					$data['query'] = $this->home->get_by_month($id, $bulan)->result_array();
+
+					$this->load->view('core/base_app', $data);
+
+				} else {
+					$data['title'] = 'Administrator';
+					$data['page'] = 'home/view';
+					$data['bulan'] = $bulan;
+					$data['item'] = $this->home->get_nama_item($id)->row();
+					$data['query'] = '';
+
+					$this->load->view('core/base_app', $data);
+				}
+			}
+		} else {
+			$data['title'] = 'Administrator';
+			$data['page'] = 'home/view';
+			$data['item'] = $this->home->get_nama_item($id)->row();
+			$data['query'] = $this->home->get_one($id)->result_array();
+
+			$this->load->view('core/base_app', $data);
+		}
 	}
 }

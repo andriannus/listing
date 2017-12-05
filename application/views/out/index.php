@@ -1,10 +1,15 @@
-<div class="container">
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
+<div class="container box">
 	<h1>Daftar Item Dipakai</h1>
 
 	<a class="btn btn-default" href="<?php echo base_url('out/add'); ?>">Tambah Data</a>
-	<br><br>
+	
+	<hr>
 
-	<table class="table table-bordered">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th class="text-center">No.</th>
@@ -22,7 +27,7 @@
 			<tr>
 				<td><?php echo $no; ?></td>
 				<td><?php echo $item['nama']; ?></td>
-				<td><?php echo $item['tanggal']; ?></td>
+				<td><?php echo date('d F Y', strtotime($item['tanggal'])); ?></td>
 				<td><?php echo $item['jumlah']; ?></td>
 				<td>
 					<a class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>

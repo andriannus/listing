@@ -1,7 +1,7 @@
 <div class="container box">
-	<h1><?php echo $item->nama; ?></h1>
+	<h1>Semua Item</h1>
 
-	<form class="form-inline" method="get" action="<?php echo base_url('home/view/'.$id); ?>">
+	<?php echo form_open('home/views', 'class="form-inline"'); ?>
 		<div class="form-group">
 			<select name="bulan" class="form-control">
 				<option disabled selected>Pilih Bulan</option>
@@ -19,31 +19,11 @@
 				<option value="12" <?php if(isset($bulan) && $bulan == 12){ ?> selected <?php } ?>>Desember</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<input class="form-control" type="text" name="tahun" placeholder="Tahun" size="5"
-				<?php if(isset($tahun)){ ?> value="<?php echo $tahun; } ?>"
-			>
-		</div>
 		<button type="submit" class="btn btn-primary">Pilih</button>
-		<a class="btn btn-danger" href="<?php echo base_url('home/view/'.$id); ?>">Reset</a>
+		<a class="btn btn-danger" href="<?php echo base_url('home/views'); ?>">Reset</a>
 	<?php echo form_close(); ?>
 
 	<hr>
-
-	<?php
-		if(empty($query)){
-	?>
-
-	<div class="text-center">
-		<p>
-			<i class="fa fa-search fa-5x"></i>
-		</p>
-		<span>Tidak ada data</span>
-	</div>
-
-	<?php
-		} else {
-	?>
 
 	<table class="table table-striped">
 		<thead>
@@ -60,7 +40,6 @@
 			</tr>
 		</thead>
 		<tbody class="text-center">
-
 			<?php
 				$no = 1;
 				foreach($query as $item): 
@@ -76,11 +55,10 @@
 				<td><?php echo $item['jumlah_pakai']; ?></td>
 				<td><?php echo $item['jumlah_stokawal'] + $item['jumlah_terima'] - $item['jumlah_pakai']; ?></td>
 			</tr>
-	<?php
+			<?php
 				$no++;
 				endforeach;
-		}
-	?>
+			?>
 		</tbody>
 	</table>
 </div>

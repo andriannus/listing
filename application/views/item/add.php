@@ -10,19 +10,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php echo form_open('item/add_process'); ?>
 		<div class="form-group">
 			<label>Slug</label>
-			<input class="form-control" name="slug">
+			<input class="form-control" name="slug" placeholder="contoh: kardus-besar-logo">
 		</div>
 		<div class="form-group">
-			<label>Nama Barang</label>
-			<input class="form-control" name="nama">
+			<label>Nama Item</label>
+			<input class="form-control" name="nama" placeholder="contoh: Kardus Besar Logo">
 		</div>
 		<div class="form-group">
 			<label>Deskripsi</label>
-			<textarea class="form-control" name="deskripsi"></textarea>
+			<textarea class="form-control" name="deskripsi" placeholder="Masukkan deskripsi dari item"></textarea>
 		</div>
 		<div class="form-group">
 			<label>Satuan</label>
-			<input class="form-control" name="satuan">
+			<input class="form-control" name="satuan" placeholder="contoh: Pcs">
 		</div>
 		<div class="form-group">
 			<div class="row">

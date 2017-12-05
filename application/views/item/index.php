@@ -2,13 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<div class="container">
+<div class="container box">
 	<h1>Daftar Item</h1>
 
 	<a class="btn btn-default" href="<?php echo base_url('item/add'); ?>">Tambah Data</a>
-	<br><br>
+	
+	<hr>
 
-	<table class="table table-bordered">
+	<table class="table table-striped">
 		<thead>
 			<th class="text-center" width="5%">No.</th>
 			<th class="text-center" width="30%">Nama Item</th>
