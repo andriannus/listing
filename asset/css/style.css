@@ -13,6 +13,17 @@ main {
 	
 }
 
+.btn-table {
+	border: none;
+	padding: 0 !important;
+	font-weight: bold;
+}
+
+.btn-table:hover {
+	background-color: transparent;
+	text-decoration: underline;
+}
+
 .date {
 	padding: 0 !important;
 	cursor: pointer;
@@ -20,6 +31,10 @@ main {
 
 .date input {
 	cursor: pointer;
+}
+
+.no-margin-top {
+	margin-top: 0 !important;
 }
 
 .margin-top-sm {

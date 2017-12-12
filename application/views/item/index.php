@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<td><?php echo $item['satuan']; ?></td>
 				<td><?php echo $item['deskripsi']; ?></td>
 				<td>
-					<a class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url('item/edit/'.$item['id_item']); ?>"><i class="fa fa-pencil"></i></a>
 					<a class="btn btn-sm btn-danger" href="<?php echo base_url('item/delete/'.$item['id_item']); ?>"><i class="fa fa-trash"></i></a>
 				</td>
 			</tr>

@@ -14,6 +14,13 @@ class In_model extends CI_Model {
 		return $query;
 	}
 
+	public function get_one($id_itemterima)
+	{
+		$this->db->where('id_itemterima', $id_itemterima);
+		return $this->db->get('tb_itemterima');
+	}
+
+
 	public function insert($data)
 	{
 		$this->db->insert('tb_itemterima', $data);
@@ -23,5 +30,11 @@ class In_model extends CI_Model {
 	{
 		$this->db->where('id_itemterima', $id_itemterima);
 		$this->db->delete('tb_itemterima');
+	}
+
+	public function update($id_itemterima, $data)
+	{
+		$this->db->where('id_itemterima', $id_itemterima);
+		$this->db->update('tb_itemterima', $data);
 	}
 }

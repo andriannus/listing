@@ -14,6 +14,12 @@ class Out_model extends CI_Model {
 		return $query;
 	}
 
+	public function get_one($id_itempakai)
+	{
+		$this->db->where('id_itempakai', $id_itempakai);
+		return $this->db->get('tb_itempakai');
+	}
+
 	public function insert($data)
 	{
 		$this->db->insert('tb_itempakai', $data);
@@ -23,5 +29,11 @@ class Out_model extends CI_Model {
 	{
 		$this->db->where('id_itempakai', $id_itempakai);
 		$this->db->delete('tb_itempakai');
+	}
+
+	public function update($id_itempakai, $data)
+	{
+		$this->db->where('id_itempakai', $id_itempakai);
+		$this->db->update('tb_itempakai', $data);
 	}
 }

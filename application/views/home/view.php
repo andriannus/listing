@@ -1,5 +1,8 @@
 <div class="container box">
-	<h1><?php echo $item->nama; ?></h1>
+	<h1><?php echo $item->nama. " (". $item->satuan. ")"; ?></h1>
+	<p><?php echo $item->deskripsi; ?></p>
+
+	<hr>
 
 	<form class="form-inline" method="get" action="<?php echo base_url('home/view/'.$id); ?>">
 		<div class="form-group">
@@ -49,9 +52,41 @@
 		<thead>
 			<tr>
 				<th class="text-center">No.</th>
-				<th class="text-center">Nama Barang</th>
-				<th class="text-center">Deskripsi</th>
-				<th class="text-center">Satuan</th>
+				<th class="text-center">
+					<?php
+						if(isset($bulanBy)) {
+							if($bulanBy == 'asc') {
+					?>
+
+					<form method="get" action="<?php echo base_url('home/view/'.$id); ?>">
+						<?php echo form_hidden('bulanBy', 'desc'); ?>
+						<button class="btn btn-default btn-table">Bulan <i class="fa fa-caret-down"></i></button>
+					</form>
+
+					<?php
+							} else {
+					?>
+
+					<form method="get" action="<?php echo base_url('home/view/'.$id); ?>">
+						<?php echo form_hidden('bulanBy', 'asc'); ?>
+						<button class="btn btn-default btn-table">Bulan <i class="fa fa-caret-up"></i></button>
+					</form>
+
+					<?php
+							}
+						} else {
+					?>
+
+					<form method="get" action="<?php echo base_url('home/view/'.$id); ?>">
+						<?php echo form_hidden('bulanBy', 'desc'); ?>
+						<button class="btn btn-default btn-table">Bulan <i class="fa fa-caret-down"></i></button>
+					</form>
+
+					<?php
+						}
+					?>
+					
+				</th>
 				<th class="text-center">Stok Awal</th>
 				<th class="text-center">Terima</th>
 				<th class="text-center">Total</th>
@@ -63,24 +98,39 @@
 
 			<?php
 				$no = 1;
+				$jumlah = 0;
 				foreach($query as $item): 
+					if(!empty($item['tanggal'])) {
+						$jumlah++;
 			?>
 			<tr>
 				<td><?php echo $no; ?></td>
-				<td><?php echo $item['nama']; ?></td>
-				<td><?php echo $item['deskripsi']; ?></td>
-				<td><?php echo $item['satuan']; ?></td>
+				<td><?php echo date('F', strtotime($item['tanggal'])); ?></td>
 				<td><?php echo $item['jumlah_stokawal']; ?></td>
 				<td><?php echo $item['jumlah_terima']; ?></td>
 				<td><?php echo $item['jumlah_stokawal'] + $item['jumlah_terima']; ?></td>
 				<td><?php echo $item['jumlah_pakai']; ?></td>
 				<td><?php echo $item['jumlah_stokawal'] + $item['jumlah_terima'] - $item['jumlah_pakai']; ?></td>
 			</tr>
+
 	<?php
+				}
 				$no++;
 				endforeach;
 		}
 	?>
 		</tbody>
+
 	</table>
+	
+	<?php if($jumlah == 0) { ?>
+	
+	<div class="text-center">
+		<p>
+			<i class="fa fa-search fa-5x"></i>
+		</p>
+		<span>Tidak ada data</span>
+	</div>
+
+	<?php } ?>
 </div>

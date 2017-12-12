@@ -56,11 +56,17 @@
 					<a href="#"><i class="fa fa-gear"></i> Laporan</a>
 				</li>
 			</ul>
+			<?php
+				if ($this->session->userdata('login') == true) {
+			?>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+					<a href="<?php echo base_url('login/logout'); ?>"><i class="fa fa-sign-out"></i> Logout</a>
 				</li>
 			</ul>
+			<?php
+				}
+			?>
 		</div>
 	</div>
 </nav>

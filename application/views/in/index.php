@@ -9,6 +9,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 	<hr>
 
+	<?php if($jumlah == 0) { ?>
+
+	<div class="text-center">
+		<p>
+			<i class="fa fa-search fa-5x"></i>
+		</p>
+		<span>Tidak ada data</span>
+	</div>
+
+	<?php } else { ?>
+
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -30,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<td><?php echo date('d F Y', strtotime($item['tanggal'])); ?></td>
 				<td><?php echo $item['jumlah']; ?></td>
 				<td>
-					<a class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url('in/edit/'.$item['id_itemterima']); ?>"><i class="fa fa-pencil"></i></a>
 					<a class="btn btn-sm btn-danger" href="<?php echo base_url('in/delete/'.$item['id_itemterima']); ?>"><i class="fa fa-trash"></i></a>
 				</td>
 			</tr>
@@ -40,4 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			?>
 		</tbody>
 	</table>
+
+	<?php } ?>
 </div>

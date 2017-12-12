@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <div class="container">
+	<h1>Daftar Item</h1>
 	<div class="row">
 		<?php foreach($query as $item): ?>
 			<div class="col-md-4">

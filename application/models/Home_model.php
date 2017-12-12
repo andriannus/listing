@@ -8,6 +8,7 @@ class Home_model extends CI_Model {
 		$this->db->select('	tb_item.nama,
 							tb_item.deskripsi,
 							tb_item.satuan,
+							month(tb_stokawal.tanggal) as bulan,
 							tb_stokawal.jumlah as jumlah_stokawal,
 							tb_itemterima.jumlah as jumlah_terima,
 							tb_itempakai.jumlah as jumlah_pakai ');
@@ -23,14 +24,15 @@ class Home_model extends CI_Model {
 		return $query;
 	}
 
-	public function get_one($id)
+	public function get_one($id, $bulanBy)
 	{
 		$this->db->select('	tb_item.nama,
 							tb_item.deskripsi,
 							tb_item.satuan,
+							tb_stokawal.tanggal as tanggal,
 							sum(tb_stokawal.jumlah) as jumlah_stokawal,
-							tb_itemterima.jumlah as jumlah_terima,
-							tb_itempakai.jumlah as jumlah_pakai ');
+							sum(tb_itemterima.jumlah) as jumlah_terima,
+							sum(tb_itempakai.jumlah) as jumlah_pakai ');
 		$this->db->from('tb_item');
 		$this->db->join('tb_stokawal', 'tb_item.id_item = tb_stokawal.id_item');
 		$this->db->join('tb_itemterima', 'tb_item.id_item = tb_itemterima.id_item');
@@ -40,6 +42,10 @@ class Home_model extends CI_Model {
 							month(tb_stokawal.tanggal) = month(tb_itemterima.tanggal) &&
 							month(tb_stokawal.tanggal) = month(tb_itempakai.tanggal)
 						');
+		$this->db->group_by('month(tb_stokawal.tanggal)');
+		if(isset($bulanBy)) {
+			$this->db->order_by('month(tb_stokawal.tanggal)', $bulanBy);
+		}
 		$query = $this->db->get();
 		return $query;
 	}
@@ -49,9 +55,10 @@ class Home_model extends CI_Model {
 		$this->db->select('	tb_item.nama,
 							tb_item.deskripsi,
 							tb_item.satuan,
+							tb_stokawal.tanggal as tanggal,
 							sum(tb_stokawal.jumlah) as jumlah_stokawal,
-							tb_itemterima.jumlah as jumlah_terima,
-							tb_itempakai.jumlah as jumlah_pakai ');
+							sum(tb_itemterima.jumlah) as jumlah_terima,
+							sum(tb_itempakai.jumlah) as jumlah_pakai ');
 		$this->db->from('tb_item');
 		$this->db->join('tb_stokawal', 'tb_item.id_item = tb_stokawal.id_item');
 		$this->db->join('tb_itemterima', 'tb_item.id_item = tb_itemterima.id_item');

@@ -9,6 +9,10 @@ class Item extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('item_model', 'item');
+
+		if ($this->session->userdata('login') != true) {
+			redirect('login');
+		}
 	}
 
 	public function index()
@@ -44,6 +48,30 @@ class Item extends CI_Controller {
 	public function delete($id_item)
 	{
 		$this->item->delete($id_item);
+		redirect('item');
+	}
+
+	public function edit($id_item)
+	{
+		$data['title'] = 'Administrator';
+		$data['page'] = 'item/edit';
+		$data['query'] = $this->item->get_one($id_item)->row();
+
+		$this->load->view('core/base_app', $data);
+	}
+
+	public function edit_process()
+	{
+		$id_item = $this->input->post('id_item');
+
+		$data = array(
+			'slug' => $this->input->post('slug'),
+			'nama' => $this->input->post('nama'),
+			'deskripsi' => $this->input->post('deskripsi'),
+			'satuan' => $this->input->post('satuan')
+		);
+
+		$this->item->update($id_item, $data);
 		redirect('item');
 	}
 }

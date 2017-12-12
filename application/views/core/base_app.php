@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="">
 	<head>
 		<title><?php echo $title; ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">

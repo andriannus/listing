@@ -8,6 +8,10 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->model('item_model', 'item');
 		$this->load->model('home_model', 'home');
+
+		if ($this->session->userdata('login') != true) {
+			redirect('login');
+		}
 	}
 
 	public function index()
@@ -34,6 +38,9 @@ class Home extends CI_Controller {
 
 		$bulan = $this->input->get('bulan');
 		$tahun = $this->input->get('tahun');
+
+		$bulanBy = $this->input->get('bulanBy');
+		$data['bulanBy'] = $bulanBy;
 
 		if(isset($bulan)) {
 
@@ -88,7 +95,7 @@ class Home extends CI_Controller {
 			$data['title'] = 'Administrator';
 			$data['page'] = 'home/view';
 			$data['item'] = $this->home->get_nama_item($id)->row();
-			$data['query'] = $this->home->get_one($id)->result_array();
+			$data['query'] = $this->home->get_one($id, $bulanBy)->result_array();
 
 			$this->load->view('core/base_app', $data);
 		}

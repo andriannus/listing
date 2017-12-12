@@ -7,19 +7,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h1 class="text-center">Tambah Data Item Dipakai</h1>
 		<hr>
 
-		<?php echo form_open('out/add_process', 'name="addOutItem"'); ?>
-		<div class="form-group">
-			<label>Pilih Item</label>
-			<select name="id_item" class="form-control" ng-model="item" required>
-				<?php foreach($query as $item): ?>
-					<option value="<?php echo $item['id_item']; ?>"><?php echo $item['nama']; ?></option>
-				<?php endforeach; ?>
-			</select>
-		</div>
+		<?php echo form_open('out/edit_process'); ?>
+		<?php echo form_hidden('id_itempakai', $out->id_itempakai); ?>
 		<div class="form-group">
 			<label>Tanggal</label>
 			<div class="input-group date datepicker" data-provide="datepicker">
-				<input type="text" class="form-control" name="tanggal" ng-model="tanggal" required readonly>
+				<input type="text" class="form-control" name="tanggal" value="<?php echo $out->tanggal; ?>" readonly>
 				<div class="input-group-addon">
 					<i class="fa fa-calendar"></i>
 				</div>
@@ -27,13 +20,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<div class="form-group">
 			<label>Jumlah Item Dipakai</label>
-			<input class="form-control" name="jumlah" ng-model="jumlah" required>
+			<input class="form-control" name="jumlah" value="<?php echo $out->jumlah; ?>">
 		</div>
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-block btn-success" type="submit" ng-show="!addOutItem.$invalid">Submit</button>
-					<button class="btn btn-block btn-success no-margin-top" type="submit" ng-show="addOutItem.$invalid" disabled>Submit</button>
+					<input class="btn btn-block btn-success" type="submit" value="Submit">
 				</div>
 				<div class="col-md-6">
 					<a class="btn btn-block btn-danger" href="<?php echo base_url('out'); ?>">Cancel</a>

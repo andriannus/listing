@@ -8,6 +8,12 @@ class Item_model extends CI_Model {
 		return $this->db->get('tb_item');
 	}
 
+	public function get_one($id_item)
+	{
+		$this->db->where('id_item', $id_item);
+		return $this->db->get('tb_item');
+	}
+
 	public function insert($data)
 	{
 		$this->db->insert('tb_item', $data);
@@ -17,5 +23,11 @@ class Item_model extends CI_Model {
 	{
 		$this->db->where('id_item', $id_item);
 		$this->db->delete('tb_item');
+	}
+
+	public function update($id_item, $data)
+	{
+		$this->db->where('id_item', $id_item);
+		$this->db->update('tb_item', $data);
 	}
 }

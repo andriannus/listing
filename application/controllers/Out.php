@@ -10,6 +10,10 @@ class Out extends CI_Controller {
 		parent::__construct();
 		$this->load->model('item_model', 'item');
 		$this->load->model('out_model', 'out');
+
+		if ($this->session->userdata('login') != true) {
+			redirect('login');
+		}
 	}
 
 	public function index()
@@ -17,6 +21,7 @@ class Out extends CI_Controller {
 		$data['title'] = 'Daftar Produk Masuk';
 		$data['page'] = 'out/index';
 		$data['query'] = $this->out->get_all()->result_array();
+		$data['jumlah'] = $this->out->get_all()->num_rows();
 
 		$this->load->view('core/base_app', $data);
 	}
@@ -45,6 +50,29 @@ class Out extends CI_Controller {
 	public function delete($id_itempakai)
 	{
 		$this->out->delete($id_itempakai);
+		redirect('out');
+	}
+
+	public function edit($id_itempakai)
+	{
+		$data['title'] = 'Administrator';
+		$data['page'] = 'out/edit';
+		$data['query'] = $this->item->get_all()->result_array();
+		$data['out'] = $this->out->get_one($id_itempakai)->row();
+
+		$this->load->view('core/base_app', $data);
+	}
+
+	public function edit_process()
+	{
+		$id_itempakai = $this->input->post('id_itempakai');
+
+		$data = array(
+			'tanggal' => $this->input->post('tanggal'),
+			'jumlah' => $this->input->post('jumlah')
+		);
+
+		$this->out->update($id_itempakai, $data);
 		redirect('out');
 	}
 }
